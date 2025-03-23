@@ -2,9 +2,7 @@
 (function() {
   "use strict";
 
-  /**
-   * Header toggle
-   */
+
   const headerToggleBtn = document.querySelector('.header-toggle');
 
   function headerToggle() {
@@ -14,9 +12,7 @@
   }
   headerToggleBtn.addEventListener('click', headerToggle);
 
-  /**
-   * Hide mobile nav on same-page/hash links
-   */
+
   document.querySelectorAll('#navmenu a').forEach(navmenu => {
     navmenu.addEventListener('click', () => {
       if (document.querySelector('.header-show')) {
@@ -108,9 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-  /**
-   * Toggle mobile nav dropdowns
-   */
+
   document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
     navmenu.addEventListener('click', function(e) {
       e.preventDefault();
@@ -120,9 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  /**
-   * Preloader
-   */
+  
   const preloader = document.querySelector('#preloader');
   if (preloader) {
     window.addEventListener('load', () => {
@@ -130,9 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /**
-   * Scroll top button
-   */
+
   let scrollTop = document.querySelector('.scroll-top');
 
   function toggleScrollTop() {
@@ -212,10 +202,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-
-  /**
-   * Init isotope layout and filters
-   */
   document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
     let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
     let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
@@ -246,9 +232,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   });
 
-  /**
-   * Init swiper sliders
-   */
+
   function initSwiper() {
     document.querySelectorAll(".init-swiper").forEach(function(swiperElement) {
       let config = JSON.parse(
@@ -265,9 +249,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   window.addEventListener("load", initSwiper);
 
-  /**
-   * Correct scrolling position upon page load for URLs containing hash links.
-   */
+  
   window.addEventListener('load', function(e) {
     if (window.location.hash) {
       if (document.querySelector(window.location.hash)) {
@@ -283,9 +265,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  /**
-   * Navmenu Scrollspy
-   */
+ 
   let navmenulinks = document.querySelectorAll('.navmenu a');
 
   function navmenuScrollspy() {
