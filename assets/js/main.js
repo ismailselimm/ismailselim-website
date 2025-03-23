@@ -2,7 +2,6 @@
 (function() {
   "use strict";
 
-
   const headerToggleBtn = document.querySelector('.header-toggle');
 
   function headerToggle() {
@@ -11,7 +10,6 @@
     headerToggleBtn.classList.toggle('bi-x');
   }
   headerToggleBtn.addEventListener('click', headerToggle);
-
 
   document.querySelectorAll('#navmenu a').forEach(navmenu => {
     navmenu.addEventListener('click', () => {
@@ -154,9 +152,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   window.addEventListener('load', aosInit);
 
-  /**
-   * Init typed.js
-   */
   const selectTyped = document.querySelector('.typed');
 if (selectTyped) {
   let typed_strings = selectTyped.getAttribute('data-typed-items');
