@@ -445,11 +445,12 @@ section,
   top: 0;
   left: 0;
   bottom: 0;
-  padding: 0 15px;
+  padding: 0 10px;
   transition: all ease-in-out 0.3s;
   overflow-y: auto;
   z-index: 997;
-  min-width: 200px;
+  min-width: 80px;
+  width: 80px;
 }
 
 @media (max-width: 1199px) {
@@ -2647,4 +2648,41 @@ a:not(.btn):not(.nav-link):not(.navmenu a) {
 
 a:not(.btn):not(.nav-link):not(.navmenu a):hover {
   text-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+}
+
+/* ========== DESKTOP NAVBAR FIX ========== */
+/* 1200px ve üzeri ekranlarda sol navbar için margin */
+@media (min-width: 1200px) {
+  main {
+    margin-left: 80px;
+  }
+
+  .hero {
+    margin-left: -80px;
+    width: 100vw;
+  }
+
+  .hero .container {
+    margin-left: 80px;
+  }
+
+  .header {
+    width: 80px;
+    min-width: 80px;
+  }
+}
+
+/* 1600px üzeri büyük ekranlar için */
+@media (min-width: 1600px) {
+  main {
+    margin-left: 85px;
+  }
+
+  .hero {
+    margin-left: -85px;
+  }
+
+  .hero .container {
+    margin-left: 85px;
+  }
 }
