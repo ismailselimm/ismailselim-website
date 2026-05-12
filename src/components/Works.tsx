@@ -10,6 +10,9 @@ type LightboxState = {
   title: string
 } | null
 
+const AUTOPLAY_MS = 2400
+const POST_INTERACTION_PAUSE_MS = 5000
+
 export default function Works() {
   const ref = useRef<HTMLElement>(null)
   const [lightbox, setLightbox] = useState<LightboxState>(null)
@@ -27,15 +30,6 @@ export default function Works() {
     })
     return cleanup
   }, [])
-
-  const openLightbox = (project: Project, startIndex = 0) => {
-    if (!project.gallery || project.gallery.length === 0) return
-    setLightbox({
-      images: project.gallery,
-      startIndex,
-      title: project.title,
-    })
-  }
 
   return (
     <section
@@ -64,7 +58,10 @@ export default function Works() {
               key={p.id}
               project={p}
               reverse={i % 2 === 1}
-              onOpenGallery={(idx) => openLightbox(p, idx)}
+              onOpenGallery={(idx) => {
+                if (!p.gallery || p.gallery.length === 0) return
+                setLightbox({ images: p.gallery, startIndex: idx, title: p.title })
+              }}
             />
           ))}
         </div>
@@ -148,14 +145,42 @@ function FeaturedProject({ project, reverse, onOpenGallery }: FeaturedProps) {
       : aspect === 'landscape'
       ? 'aspect-[16/10]'
       : 'aspect-square'
-  const fit =
-    aspect === 'portrait' ? 'object-cover object-top' : 'object-cover'
+  const fit = aspect === 'portrait' ? 'object-cover object-top' : 'object-cover'
 
-  const gallery = project.gallery ?? []
-  const hasGallery = gallery.length > 1
-  // Show up to 5 thumbnails (excluding cover), then "+N" if more
-  const thumbsToShow = hasGallery ? gallery.slice(1, 6) : []
-  const remaining = hasGallery ? Math.max(0, gallery.length - 6) : 0
+  // Build the image set — prefer gallery if it exists, otherwise use just cover
+  const images = project.gallery && project.gallery.length > 0
+    ? project.gallery
+    : [project.cover]
+  const hasGallery = images.length > 1
+
+  const [activeIdx, setActiveIdx] = useState(0)
+  const [hovering, setHovering] = useState(false)
+  const pauseUntilRef = useRef(0)
+  const stripRef = useRef<HTMLDivElement>(null)
+
+  // Autoplay
+  useEffect(() => {
+    if (!hasGallery || hovering) return
+    const id = window.setInterval(() => {
+      if (Date.now() < pauseUntilRef.current) return
+      setActiveIdx((i) => (i + 1) % images.length)
+    }, AUTOPLAY_MS)
+    return () => clearInterval(id)
+  }, [hovering, hasGallery, images.length])
+
+  // Scroll active thumb into view
+  useEffect(() => {
+    if (!stripRef.current) return
+    const active = stripRef.current.querySelector<HTMLElement>(`[data-idx="${activeIdx}"]`)
+    if (active) {
+      active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
+    }
+  }, [activeIdx])
+
+  const handleThumbClick = (i: number) => {
+    setActiveIdx(i)
+    pauseUntilRef.current = Date.now() + POST_INTERACTION_PAUSE_MS
+  }
 
   return (
     <article>
@@ -165,79 +190,136 @@ function FeaturedProject({ project, reverse, onOpenGallery }: FeaturedProps) {
           data-line
           className={`opacity-0 md:col-span-7 ${reverse ? 'md:order-2' : 'md:order-1'}`}
         >
-          {/* Cover */}
-          <button
-            onClick={() => onOpenGallery(0)}
-            data-cursor="view"
-            disabled={!hasGallery}
-            className="group block w-full overflow-hidden bg-bone/5 disabled:cursor-default"
+          <div
+            className="relative"
+            onMouseEnter={() => setHovering(true)}
+            onMouseLeave={() => setHovering(false)}
           >
-            <div className={`relative w-full overflow-hidden ${aspectClass}`}>
-              <img
-                src={project.cover}
-                alt={`${project.title} cover`}
-                className={`absolute inset-0 h-full w-full ${fit} transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]`}
-                loading="lazy"
-              />
-              {hasGallery && (
-                <div className="absolute inset-0 flex items-center justify-center bg-ink/55 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+            {/* Cover stage — stacked images, click opens lightbox */}
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={() => onOpenGallery(activeIdx)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  onOpenGallery(activeIdx)
+                }
+              }}
+              data-cursor="view"
+              className={`group block w-full cursor-pointer overflow-hidden bg-bone/5 ${aspectClass}`}
+              aria-label={`${project.title} galerisini aç`}
+            >
+              <div className="relative h-full w-full">
+                {/* Image stack — crossfade */}
+                {images.map((img, i) => (
+                  <img
+                    key={img}
+                    src={img}
+                    alt={`${project.title} ${i + 1}`}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                    className={`absolute inset-0 h-full w-full ${fit} transition-opacity duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                      i === activeIdx ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                ))}
+
+                {/* Subtle Ken Burns scale on active image — extra polish */}
+                <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.02]" />
+
+                {/* Top-left status */}
+                <div className="absolute left-4 top-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-bone mix-blend-difference md:left-5 md:top-5">
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-blood" />
+                  <span>Yayında</span>
+                </div>
+
+                {/* Counter top-right */}
+                {hasGallery && (
+                  <div className="absolute right-4 top-4 font-mono text-[10px] uppercase tracking-[0.25em] text-bone mix-blend-difference md:right-5 md:top-5">
+                    {String(activeIdx + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+                  </div>
+                )}
+
+                {/* N° in bottom-right (above gradient) */}
+                <div className="absolute right-4 bottom-3 z-20 font-mono text-[10px] uppercase tracking-[0.25em] text-bone mix-blend-difference md:right-5 md:bottom-5">
+                  N° {project.index}
+                </div>
+
+                {/* Bottom gradient for thumb strip legibility */}
+                {hasGallery && (
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink/90 via-ink/50 to-transparent md:h-40" />
+                )}
+
+                {/* Hover overlay — "galeriyi aç" */}
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-ink/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                   <div className="flex flex-col items-center gap-2 text-bone">
                     <span className="font-mono text-[10px] uppercase tracking-[0.3em]">
-                      {gallery.length} görsel
+                      {hasGallery ? `${images.length} görsel` : 'Önizleme'}
                     </span>
                     <span
-                      className="font-display text-3xl italic"
+                      className="font-display text-2xl italic md:text-3xl"
                       style={{ fontVariationSettings: '"opsz" 96, "SOFT" 100, "WONK" 1, "wght" 400' }}
                     >
-                      galeriyi aç →
+                      {hasGallery ? 'galeriyi aç →' : 'siteyi aç →'}
                     </span>
                   </div>
                 </div>
-              )}
-              <div className="absolute left-4 top-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-bone mix-blend-difference">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-blood" />
-                <span>Yayında</span>
-              </div>
-              <div className="absolute right-4 bottom-4 font-mono text-[10px] uppercase tracking-[0.25em] text-bone mix-blend-difference">
-                N° {project.index}
               </div>
             </div>
-          </button>
 
-          {/* Thumbnail strip */}
-          {hasGallery && (
-            <div className="mt-3 grid grid-cols-5 gap-2 md:gap-3">
-              {thumbsToShow.map((img, i) => (
-                <button
-                  key={img}
-                  onClick={() => onOpenGallery(i + 1)}
-                  data-cursor="view"
-                  className="group relative aspect-[16/10] overflow-hidden bg-bone/5"
-                  aria-label={`${i + 2}. görseli aç`}
+            {/* Thumb strip overlay — sibling of cover, absolute over bottom */}
+            {hasGallery && (
+              <div className="absolute inset-x-0 bottom-3 z-30 md:bottom-5">
+                <div
+                  ref={stripRef}
+                  className="flex justify-start gap-1.5 overflow-x-auto scrollbar-hide px-3 md:gap-2 md:px-5 md:justify-center"
+                  onClick={(e) => e.stopPropagation()}
                 >
-                  <img
-                    src={img}
-                    alt=""
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover opacity-65 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100"
-                  />
-                </button>
-              ))}
-              {remaining > 0 && (
-                <button
-                  onClick={() => onOpenGallery(6)}
-                  data-cursor="view"
-                  className="group relative aspect-[16/10] overflow-hidden bg-bone/10 transition-colors hover:bg-bone/20"
-                  aria-label="Tüm görseller"
-                >
-                  <span className="absolute inset-0 flex flex-col items-center justify-center gap-0.5 font-mono uppercase tracking-[0.2em] text-bone">
-                    <span className="text-[9px] text-bone/55">tümü</span>
-                    <span className="text-lg">+{remaining}</span>
-                  </span>
-                </button>
-              )}
-            </div>
-          )}
+                  {images.map((img, i) => (
+                    <button
+                      key={img}
+                      data-idx={i}
+                      onClick={() => handleThumbClick(i)}
+                      data-cursor="hover"
+                      aria-label={`${i + 1}. görsele git`}
+                      className={`relative aspect-[16/10] h-7 shrink-0 overflow-hidden bg-ink/40 backdrop-blur transition-all duration-500 md:h-10 ${
+                        i === activeIdx
+                          ? 'opacity-100 ring-2 ring-bone ring-offset-0'
+                          : 'opacity-50 hover:opacity-90'
+                      }`}
+                    >
+                      <img
+                        src={img}
+                        alt=""
+                        loading="lazy"
+                        className="h-full w-full object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Pause indicator (subtle dot pulsing) — visual hint that it's autoplay */}
+            {hasGallery && (
+              <div className="pointer-events-none absolute right-4 bottom-12 z-20 flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.25em] text-bone/60 mix-blend-difference md:right-5 md:bottom-16">
+                {hovering ? (
+                  <>
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-bone" />
+                    <span>duraklatıldı</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="relative inline-flex h-1.5 w-1.5">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blood opacity-60" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-blood" />
+                    </span>
+                    <span>oynatılıyor</span>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Info column */}
