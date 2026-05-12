@@ -110,8 +110,8 @@ export default function Experience() {
             </ol>
           </div>
 
-          {/* Education */}
-          <div className="md:col-span-4">
+          {/* Education — sticky on desktop so it stays visible next to long experience list */}
+          <div className="md:col-span-4 md:sticky md:top-32 md:self-start">
             <h3
               data-line
               className="font-display text-[5.5vw] leading-[0.95] tracking-[-0.03em] opacity-0 md:text-[2.4vw]"

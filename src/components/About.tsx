@@ -45,7 +45,7 @@ export default function About() {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 gap-14 md:grid-cols-12 md:gap-12">
+        <div className="grid grid-cols-1 gap-14 md:grid-cols-12 md:items-center md:gap-12">
           {/* Pull quote */}
           <div className="md:col-span-7">
             <p
@@ -73,7 +73,7 @@ export default function About() {
 
           {/* Photo + bio */}
           <div className="flex flex-col gap-8 md:col-span-5 md:gap-10">
-            <div data-photo className="relative aspect-[4/5] w-full max-w-[360px] overflow-hidden rounded-sm bg-bone-2 opacity-0 md:ml-auto">
+            <div data-photo className="relative mx-auto aspect-[4/5] w-full max-w-[240px] overflow-hidden rounded-sm bg-bone-2 opacity-0 md:mx-0 md:ml-auto md:max-w-[260px]">
               <img
                 src="/img/profile.png"
                 alt="İsmail Selim Garip"
