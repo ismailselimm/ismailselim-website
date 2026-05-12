@@ -50,8 +50,15 @@ export const projects: Project[] = [
       '81 il kapsamı, hizmet sağlayıcı paneli',
       'Müşteri tarafı rezervasyon akışı',
     ],
-    cover: '/portfolio/temizlikexpress/app.png',
-    coverAspect: 'portrait',
+    cover: '/portfolio/temizlikexpress/01.jpg',
+    coverAspect: 'landscape',
+    gallery: [
+      '/portfolio/temizlikexpress/01.jpg',
+      '/portfolio/temizlikexpress/02.jpg',
+      '/portfolio/temizlikexpress/03.jpg',
+      '/portfolio/temizlikexpress/04.jpg',
+      '/portfolio/temizlikexpress/05.jpg',
+    ],
     link: { label: 'temizlikexpress.com', href: 'https://temizlikexpress.com/' },
   },
 ]
