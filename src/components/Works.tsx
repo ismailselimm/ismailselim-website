@@ -49,7 +49,7 @@ export default function Works() {
             <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-12">
               <div className="md:col-span-8">
                 <p
-                  className="font-display text-[8vw] leading-[1.02] tracking-[-0.03em] md:text-[5vw]"
+                  className="font-display text-[6vw] leading-[1.05] tracking-[-0.03em] md:text-[3.6vw]"
                   style={{ fontVariationSettings: '"opsz" 144, "SOFT" 80, "wght" 360' }}
                 >
                   <span className="block">Yeni vitrin</span>
@@ -57,16 +57,16 @@ export default function Works() {
                     className="block italic text-bone/55"
                     style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1' }}
                   >
-                    hazırlanıyor.
+                    hazırlık aşamasında<span className="not-italic text-blood">.</span>
                   </span>
                 </p>
-                <p className="mt-8 max-w-md text-[15px] leading-[1.6] text-bone/65">
-                  Eski projeleri arşivledim; yenilerini özenle seçiyorum.
-                  Görmek istediğin bir şey varsa{' '}
+                <p className="mt-8 max-w-md text-[14.5px] leading-[1.6] text-bone/65">
+                  Önceki çalışmalar arşivde; seçilmiş yeni projeler kısa süre içinde yayında.
+                  Bu sürede belirli bir çalışma görmek isterseniz{' '}
                   <a href="#contact" className="text-bone underline-link">
-                    mesaj at
+                    iletişime geçebilirsiniz
                   </a>
-                  , birebir paylaşırım.
+                  .
                 </p>
               </div>
 
@@ -114,7 +114,7 @@ export default function Works() {
                   <div className="flex items-baseline gap-5 md:gap-8">
                     <span className="font-mono text-[11px] tracking-[0.25em] text-bone/50">{p.index}</span>
                     <h3
-                      className="font-display text-[8.5vw] leading-[0.95] tracking-[-0.02em] md:text-[4.6vw] lg:text-[4vw] transition-all duration-500 group-hover:translate-x-2"
+                      className="font-display text-[6.5vw] leading-[0.95] tracking-[-0.02em] md:text-[3.4vw] lg:text-[3vw] transition-all duration-500 group-hover:translate-x-2"
                       style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 380' }}
                     >
                       {p.title}

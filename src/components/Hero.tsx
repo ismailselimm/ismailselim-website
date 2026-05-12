@@ -52,19 +52,19 @@ export default function Hero() {
           data-reveal-meta
           className="font-mono text-[10px] uppercase tracking-[0.3em] text-mute opacity-0"
         >
-          Portföy <span className="mx-2 text-blood">●</span> N° 02 <span className="mx-2 text-blood">●</span> 2026
+          Portföy <span className="mx-2 text-blood">●</span> İstanbul, Türkiye
         </div>
         <div
           data-reveal-meta
           className="hidden font-mono text-[10px] uppercase tracking-[0.3em] text-mute opacity-0 sm:block"
         >
-          v2.0 / refreshed
+          Mobil Mühendis · Flutter / Firebase
         </div>
       </div>
 
       {/* Main display headline */}
       <div className="mx-auto mt-14 max-w-[1600px] px-5 md:mt-20 md:px-10">
-        <h1 className="font-display text-balance text-[15vw] leading-[0.9] tracking-[-0.04em] md:text-[11.5vw] lg:text-[10.5vw]">
+        <h1 className="font-display text-balance text-[12vw] leading-[0.92] tracking-[-0.035em] md:text-[8.6vw] lg:text-[7.6vw]">
           <span className="inline-block overflow-hidden align-top">
             <span data-reveal-word className="inline-block opacity-0">Mobil</span>
           </span>{' '}
@@ -94,17 +94,13 @@ export default function Hero() {
           <span className="inline-block overflow-hidden align-top">
             <span data-reveal-word className="inline-block opacity-0">tek elden</span>
           </span>{' '}
-          <span className="inline-block overflow-hidden align-top relative">
+          <span className="inline-block overflow-hidden align-top">
             <span
               data-reveal-word
-              className="relative inline-block italic opacity-0"
+              className="inline-block italic opacity-0"
               style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "wght" 400' }}
             >
-              kuruyorum
-              <span
-                aria-hidden
-                className="absolute -right-3 -top-2 inline-block h-3 w-3 rounded-full bg-blood md:-right-5 md:-top-3 md:h-5 md:w-5"
-              />
+              kuruyorum<span className="not-italic text-blood">.</span>
             </span>
           </span>
         </h1>
@@ -114,12 +110,11 @@ export default function Hero() {
       <div className="mx-auto mt-12 flex max-w-[1600px] flex-col gap-7 px-5 md:mt-16 md:flex-row md:items-end md:justify-between md:px-10">
         <p
           data-reveal-meta
-          className="max-w-md text-[15px] leading-[1.55] text-ink/70 opacity-0 md:text-[16px]"
+          className="max-w-md text-[14.5px] leading-[1.55] text-ink/70 opacity-0 md:text-[15.5px]"
         >
-          İstanbul'dan, fikirden App Store'a kadar
-          tüm aşamaları tek elden götüren bir mobil mühendisim.
-          Şu an <span className="text-ink underline-link">BaremCars</span>'ta çalışıyorum;
-          ortak iş ve sohbet için her zaman müsaitim.
+          Flutter ve Firebase ile mobil ürünler geliştiren bir yazılım mühendisiyim.
+          Tasarımdan mağaza yayınına kadar tüm süreci uçtan uca yürütürüm.
+          Şu an <span className="text-ink underline-link">BaremCars</span> bünyesinde görev alıyorum; yeni iş birliklerine açığım.
         </p>
 
         <div

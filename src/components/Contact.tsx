@@ -61,7 +61,7 @@ export default function Contact() {
           <div className="md:col-span-8">
             <p
               data-line
-              className="font-display text-[10vw] leading-[0.95] tracking-[-0.035em] opacity-0 md:text-[6vw] lg:text-[5.4vw]"
+              className="font-display text-[7.5vw] leading-[0.95] tracking-[-0.035em] opacity-0 md:text-[4.4vw] lg:text-[4vw]"
               style={{ fontVariationSettings: '"opsz" 144, "SOFT" 50, "wght" 380' }}
             >
               <span className="block">Bir fikrin mi</span>

@@ -14,7 +14,7 @@ export default function Marquee({ items, variant = 'default' }: Props) {
         {list.map((label, i) => (
           <span
             key={`${label}-${i}`}
-            className="mx-6 flex items-center gap-6 font-display text-[8vw] leading-none tracking-[-0.02em] md:text-[6vw] lg:text-[5vw]"
+            className="mx-6 flex items-center gap-6 font-display text-[6.5vw] leading-none tracking-[-0.02em] md:text-[4.6vw] lg:text-[3.8vw]"
             style={{ fontVariationSettings: '"opsz" 144, "wght" 380, "SOFT" 60' }}
           >
             <span className={i % 3 === 1 ? 'italic text-blood' : ''}>{label}</span>

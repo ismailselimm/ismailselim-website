@@ -50,7 +50,7 @@ export default function Nav() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blood opacity-50" />
             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-blood" />
           </span>
-          <span>İSG / 2026</span>
+          <span>İsmail Selim Garip</span>
         </a>
 
         <nav className="hidden items-center gap-7 md:flex">

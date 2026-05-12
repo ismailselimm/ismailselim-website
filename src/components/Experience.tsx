@@ -50,7 +50,7 @@ export default function Experience() {
           <div className="md:col-span-8">
             <h3
               data-line
-              className="font-display text-[7vw] leading-[0.95] tracking-[-0.03em] opacity-0 md:text-[3.2vw]"
+              className="font-display text-[5.5vw] leading-[0.95] tracking-[-0.03em] opacity-0 md:text-[2.4vw]"
               style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 400' }}
             >
               Deneyim<span className="text-blood">.</span>
@@ -79,7 +79,7 @@ export default function Experience() {
 
                   <div className="flex items-baseline justify-between gap-4">
                     <h4
-                      className="font-display text-[5vw] leading-[1.1] md:text-[2.2vw]"
+                      className="font-display text-[4vw] leading-[1.1] md:text-[1.8vw]"
                       style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 400' }}
                     >
                       {exp.company}
@@ -118,7 +118,7 @@ export default function Experience() {
           <div className="md:col-span-4">
             <h3
               data-line
-              className="font-display text-[7vw] leading-[0.95] tracking-[-0.03em] opacity-0 md:text-[3.2vw]"
+              className="font-display text-[5.5vw] leading-[0.95] tracking-[-0.03em] opacity-0 md:text-[2.4vw]"
               style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 400' }}
             >
               Eğitim<span className="text-blood">.</span>
@@ -130,7 +130,7 @@ export default function Experience() {
                     {edu.dateRange}
                   </div>
                   <div
-                    className="mt-2 font-display text-[5vw] leading-[1.1] md:text-[1.5vw]"
+                    className="mt-2 font-display text-[3.8vw] leading-[1.1] md:text-[1.3vw]"
                     style={{ fontVariationSettings: '"opsz" 96, "SOFT" 30, "wght" 400' }}
                   >
                     {edu.school}

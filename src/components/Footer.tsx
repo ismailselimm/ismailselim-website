@@ -22,13 +22,13 @@ export default function Footer() {
 
   return (
     <footer className="bg-ink text-bone px-5 pb-10 md:px-10">
-      {/* Giant wordmark */}
-      <div className="border-t border-bone/15 pt-10">
+      {/* Wordmark */}
+      <div className="overflow-hidden border-t border-bone/15 pt-10">
         <div
           aria-hidden
           className="select-none whitespace-nowrap text-center font-display leading-none tracking-[-0.04em]"
           style={{
-            fontSize: 'clamp(70px, 21vw, 360px)',
+            fontSize: 'clamp(38px, 11.5vw, 150px)',
             fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 400',
           }}
         >
@@ -36,7 +36,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mt-10 grid grid-cols-2 gap-4 font-mono text-[11px] uppercase tracking-[0.2em] text-bone/50 md:grid-cols-4">
+      <div className="mt-10 grid grid-cols-2 gap-4 font-mono text-[11px] uppercase tracking-[0.2em] text-bone/50 md:grid-cols-3">
         <div>
           <div className="text-bone/35">© 2026</div>
           <div className="mt-1">Tüm hakları saklıdır</div>
@@ -44,10 +44,6 @@ export default function Footer() {
         <div>
           <div className="text-bone/35">İstanbul</div>
           <div className="mt-1 tabular-nums">{time}</div>
-        </div>
-        <div>
-          <div className="text-bone/35">Build</div>
-          <div className="mt-1">v2.0 / 2026.05</div>
         </div>
         <div className="text-right md:text-left">
           <div className="text-bone/35">Yapım</div>

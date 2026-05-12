@@ -50,7 +50,7 @@ export default function About() {
           <div className="md:col-span-7">
             <p
               data-line
-              className="font-display text-[7vw] leading-[1.05] tracking-[-0.025em] opacity-0 md:text-[4.2vw] lg:text-[3.4vw]"
+              className="font-display text-[5.5vw] leading-[1.08] tracking-[-0.025em] opacity-0 md:text-[3.2vw] lg:text-[2.6vw]"
               style={{ fontVariationSettings: '"opsz" 144, "SOFT" 50, "wght" 380' }}
             >
               <span className="block">İyi ürün, kod yazmaktan</span>
@@ -60,13 +60,13 @@ export default function About() {
               >
                 çok daha fazlasıdır.
               </span>
-              <span className="block">Fikri,</span>
+              <span className="block">Fikir, kullanıcı,</span>
               <span className="block">
-                kullanıcıyı, mağaza onayını,{' '}
+                mağaza onayı ve{' '}
                 <span className="text-blood" style={{ fontVariationSettings: '"wght" 600' }}>
-                  detayı
+                  detay
                 </span>{' '}
-                — hepsini birlikte düşünürüm.
+                — aynı işin parçaları.
               </span>
             </p>
           </div>
@@ -86,20 +86,20 @@ export default function About() {
               </div>
             </div>
 
-            <div className="space-y-4 text-[15px] leading-[1.65] text-ink/75 md:max-w-[360px] md:ml-auto md:text-right">
+            <div className="space-y-4 text-[14.5px] leading-[1.65] text-ink/75 md:max-w-[360px] md:ml-auto md:text-right">
               <p data-line className="opacity-0">
-                Öğrencilikte mobil uygulama yapmaya başladım, birkaç uygulamayı App Store ve
-                Google Play'de yayınladım. O günden beri Flutter ve Firebase ile çalışıyorum;
-                arayüz tasarımından backend entegrasyonuna, mağaza yayınından güncellemeye
-                kadar bütün süreçleri kendim yönetiyorum.
+                Öğrencilik döneminde mobil geliştirmeye başladım; App Store ve
+                Google Play'de birden fazla uygulamayı yayına aldım. O günden bu yana
+                Flutter ve Firebase üzerine yoğunlaşıyorum.
               </p>
               <p data-line className="opacity-0">
-                Temiz kod, kullanıcı deneyimi ve performans benim için ayrı işler değil —
-                aynı işin üç yüzü. Bir fikri alıp yayınlanmış, kullanılan, güncellenen bir
-                ürüne dönüştürmeyi seviyorum.
+                Arayüz tasarımından backend mimarisine, mağaza onayından sürüm yönetimine
+                kadar bir mobil ürünün yaşam döngüsündeki her aşamada sorumluluk alıyorum.
+                Temiz kod, kullanıcı deneyimi ve performans birbirinden ayrı işler değil
+                — aynı disiplinin parçaları.
               </p>
               <p data-line className="font-mono text-[11px] uppercase tracking-[0.2em] text-mute opacity-0">
-                <span className="text-blood">↳</span> Solo dev / freelance dostu
+                <span className="text-blood">↳</span> Freelance & iş birliklerine açık
               </p>
             </div>
           </div>
