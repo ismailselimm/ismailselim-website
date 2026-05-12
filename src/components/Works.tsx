@@ -168,13 +168,16 @@ function FeaturedProject({ project, reverse, onOpenGallery }: FeaturedProps) {
     return () => clearInterval(id)
   }, [hovering, hasGallery, images.length])
 
-  // Scroll active thumb into view
+  // Scroll active thumb to center — STRIP'in kendi scroll'u, document'a dokunmuyor
   useEffect(() => {
-    if (!stripRef.current) return
-    const active = stripRef.current.querySelector<HTMLElement>(`[data-idx="${activeIdx}"]`)
-    if (active) {
-      active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' })
-    }
+    const strip = stripRef.current
+    if (!strip) return
+    // Strip horizontal olarak taşmıyorsa hiç scroll yapma
+    if (strip.scrollWidth <= strip.clientWidth) return
+    const active = strip.querySelector<HTMLElement>(`[data-idx="${activeIdx}"]`)
+    if (!active) return
+    const target = active.offsetLeft - strip.clientWidth / 2 + active.clientWidth / 2
+    strip.scrollTo({ left: target, behavior: 'smooth' })
   }, [activeIdx])
 
   const handleThumbClick = (i: number) => {

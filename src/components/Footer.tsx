@@ -40,7 +40,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mt-10 grid grid-cols-2 gap-4 font-mono text-[11px] uppercase tracking-[0.2em] text-bone/50 md:grid-cols-3">
+      <div className="mt-12 flex flex-col items-center gap-7 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-bone/50 md:flex-row md:justify-center md:gap-16 md:gap-y-0">
         <div>
           <div className="text-bone/35">© 2026</div>
           <div className="mt-1">Tüm hakları saklıdır</div>
@@ -49,7 +49,7 @@ export default function Footer() {
           <div className="text-bone/35">İstanbul</div>
           <div className="mt-1 tabular-nums">{time}</div>
         </div>
-        <div className="text-right md:text-left">
+        <div>
           <div className="text-bone/35">Yapım</div>
           <div className="mt-1">
             <a

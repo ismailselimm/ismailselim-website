@@ -3,12 +3,13 @@ import type { Experience } from '../types'
 export const experiences: Experience[] = [
   {
     company: 'BaremCars',
-    title: 'Mobil Uygulama Geliştirici',
+    title: 'Yazılım & Operasyon Sorumlusu',
     dateRange: 'Mart 2026 — Halen',
     current: true,
     bullets: [
-      'Flutter ile mobil ürün geliştirme, Firebase entegrasyonu, performans ve UX odaklı iyileştirmeler.',
-      'App Store & Google Play sürüm yönetimi.',
+      'Mobil ve web ürünlerinin uçtan uca geliştirme süreci.',
+      'Teknik kararlar, ürün operasyonu, performans ve kullanıcı deneyimi.',
+      'Sürüm yönetimi ve mağaza yayın süreçleri.',
     ],
   },
   {
