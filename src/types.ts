@@ -10,7 +10,7 @@ export type Project = {
   description: string
   highlights?: string[]
   cover: string
-  coverAspect?: 'square' | 'portrait'
+  coverAspect?: 'square' | 'portrait' | 'landscape'
   gallery?: string[]
   link: { label: string; href: string }
 }

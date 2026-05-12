@@ -1,10 +1,18 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { inView, animate } from 'motion'
 import { projects, otherWorkStats } from '../data/projects'
 import type { Project } from '../types'
+import Lightbox from './Lightbox'
+
+type LightboxState = {
+  images: string[]
+  startIndex: number
+  title: string
+} | null
 
 export default function Works() {
   const ref = useRef<HTMLElement>(null)
+  const [lightbox, setLightbox] = useState<LightboxState>(null)
 
   useEffect(() => {
     const el = ref.current
@@ -19,6 +27,15 @@ export default function Works() {
     })
     return cleanup
   }, [])
+
+  const openLightbox = (project: Project, startIndex = 0) => {
+    if (!project.gallery || project.gallery.length === 0) return
+    setLightbox({
+      images: project.gallery,
+      startIndex,
+      title: project.title,
+    })
+  }
 
   return (
     <section
@@ -43,7 +60,12 @@ export default function Works() {
         {/* Featured projects */}
         <div className="space-y-32 md:space-y-48">
           {projects.map((p, i) => (
-            <FeaturedProject key={p.id} project={p} reverse={i % 2 === 1} />
+            <FeaturedProject
+              key={p.id}
+              project={p}
+              reverse={i % 2 === 1}
+              onOpenGallery={(idx) => openLightbox(p, idx)}
+            />
           ))}
         </div>
 
@@ -99,58 +121,123 @@ export default function Works() {
           </div>
         </div>
       </div>
+
+      {lightbox && (
+        <Lightbox
+          images={lightbox.images}
+          startIndex={lightbox.startIndex}
+          title={lightbox.title}
+          onClose={() => setLightbox(null)}
+        />
+      )}
     </section>
   )
 }
 
-function FeaturedProject({ project, reverse }: { project: Project; reverse: boolean }) {
-  const isPortrait = project.coverAspect === 'portrait'
-  const imageAspect = isPortrait ? 'aspect-[3/4]' : 'aspect-square'
+type FeaturedProps = {
+  project: Project
+  reverse: boolean
+  onOpenGallery: (startIndex: number) => void
+}
+
+function FeaturedProject({ project, reverse, onOpenGallery }: FeaturedProps) {
+  const aspect = project.coverAspect ?? 'square'
+  const aspectClass =
+    aspect === 'portrait'
+      ? 'aspect-[3/4]'
+      : aspect === 'landscape'
+      ? 'aspect-[16/10]'
+      : 'aspect-square'
+  const fit =
+    aspect === 'portrait' ? 'object-cover object-top' : 'object-cover'
+
+  const gallery = project.gallery ?? []
+  const hasGallery = gallery.length > 1
+  // Show up to 5 thumbnails (excluding cover), then "+N" if more
+  const thumbsToShow = hasGallery ? gallery.slice(1, 6) : []
+  const remaining = hasGallery ? Math.max(0, gallery.length - 6) : 0
 
   return (
-    <article className="group/proj">
+    <article>
       <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-center md:gap-14">
         {/* Image column */}
         <div
           data-line
-          className={`relative opacity-0 md:col-span-7 ${reverse ? 'md:order-2' : 'md:order-1'}`}
+          className={`opacity-0 md:col-span-7 ${reverse ? 'md:order-2' : 'md:order-1'}`}
         >
-          <a
-            href={project.link.href}
-            target="_blank"
-            rel="noopener noreferrer"
+          {/* Cover */}
+          <button
+            onClick={() => onOpenGallery(0)}
             data-cursor="view"
-            className="group block relative overflow-hidden bg-bone/5"
+            disabled={!hasGallery}
+            className="group block w-full overflow-hidden bg-bone/5 disabled:cursor-default"
           >
-            <div className={`relative w-full overflow-hidden ${imageAspect}`}>
+            <div className={`relative w-full overflow-hidden ${aspectClass}`}>
               <img
                 src={project.cover}
                 alt={`${project.title} cover`}
-                className={`absolute inset-0 h-full w-full transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] ${
-                  isPortrait ? 'object-cover object-top' : 'object-cover'
-                }`}
+                className={`absolute inset-0 h-full w-full ${fit} transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]`}
                 loading="lazy"
               />
-              {/* Hover gradient + label */}
-              <div className="absolute inset-0 flex items-center justify-center bg-ink/55 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                <div className="flex flex-col items-center gap-2 text-bone">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.3em]">
-                    Canlı siteyi
-                  </span>
-                  <span className="font-display text-3xl italic">ziyaret et ↗</span>
+              {hasGallery && (
+                <div className="absolute inset-0 flex items-center justify-center bg-ink/55 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  <div className="flex flex-col items-center gap-2 text-bone">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.3em]">
+                      {gallery.length} görsel
+                    </span>
+                    <span
+                      className="font-display text-3xl italic"
+                      style={{ fontVariationSettings: '"opsz" 96, "SOFT" 100, "WONK" 1, "wght" 400' }}
+                    >
+                      galeriyi aç →
+                    </span>
+                  </div>
                 </div>
-              </div>
-              {/* Top-left corner marker */}
+              )}
               <div className="absolute left-4 top-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-bone mix-blend-difference">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-blood" />
                 <span>Yayında</span>
               </div>
-              {/* Bottom-right index */}
               <div className="absolute right-4 bottom-4 font-mono text-[10px] uppercase tracking-[0.25em] text-bone mix-blend-difference">
                 N° {project.index}
               </div>
             </div>
-          </a>
+          </button>
+
+          {/* Thumbnail strip */}
+          {hasGallery && (
+            <div className="mt-3 grid grid-cols-5 gap-2 md:gap-3">
+              {thumbsToShow.map((img, i) => (
+                <button
+                  key={img}
+                  onClick={() => onOpenGallery(i + 1)}
+                  data-cursor="view"
+                  className="group relative aspect-[16/10] overflow-hidden bg-bone/5"
+                  aria-label={`${i + 2}. görseli aç`}
+                >
+                  <img
+                    src={img}
+                    alt=""
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover opacity-65 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100"
+                  />
+                </button>
+              ))}
+              {remaining > 0 && (
+                <button
+                  onClick={() => onOpenGallery(6)}
+                  data-cursor="view"
+                  className="group relative aspect-[16/10] overflow-hidden bg-bone/10 transition-colors hover:bg-bone/20"
+                  aria-label="Tüm görseller"
+                >
+                  <span className="absolute inset-0 flex flex-col items-center justify-center gap-0.5 font-mono uppercase tracking-[0.2em] text-bone">
+                    <span className="text-[9px] text-bone/55">tümü</span>
+                    <span className="text-lg">+{remaining}</span>
+                  </span>
+                </button>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Info column */}
@@ -196,7 +283,10 @@ function FeaturedProject({ project, reverse }: { project: Project; reverse: bool
           {project.highlights && project.highlights.length > 0 && (
             <ul className="mt-6 space-y-1.5 text-[13.5px] text-bone/65">
               {project.highlights.map((h, i) => (
-                <li key={i} className="relative pl-5 before:absolute before:left-0 before:top-2.5 before:h-px before:w-3 before:bg-blood/60">
+                <li
+                  key={i}
+                  className="relative pl-5 before:absolute before:left-0 before:top-2.5 before:h-px before:w-3 before:bg-blood/60"
+                >
                   {h}
                 </li>
               ))}
