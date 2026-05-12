@@ -77,7 +77,7 @@ export default function Contact() {
                   data-cursor="hover"
                   className="underline-link text-blood"
                 >
-                  Konuşalım<span className="inline-block ml-[0.16em] translate-y-[0.08em]">.</span>
+                  Konuşalım
                 </a>
               </span>
             </p>

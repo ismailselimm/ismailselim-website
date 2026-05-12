@@ -89,7 +89,7 @@ export default function Hero() {
             className="inline-block italic opacity-0"
             style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "wght" 400' }}
           >
-            kuruyorum<span className="inline-block not-italic text-blood ml-[0.16em] translate-y-[0.08em]">.</span>
+            kuruyorum
           </span>
         </h1>
       </div>

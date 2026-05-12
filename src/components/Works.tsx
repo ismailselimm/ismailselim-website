@@ -57,7 +57,7 @@ export default function Works() {
                     className="block italic text-bone/55"
                     style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1' }}
                   >
-                    hazırlık aşamasında<span className="inline-block not-italic text-blood ml-[0.16em] translate-y-[0.08em]">.</span>
+                    hazırlık aşamasında
                   </span>
                 </p>
                 <p className="mt-8 max-w-md text-[14.5px] leading-[1.6] text-bone/65">
