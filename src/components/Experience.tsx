@@ -49,7 +49,7 @@ export default function Experience() {
               className="font-display text-[5.5vw] leading-[0.95] tracking-[-0.03em] opacity-0 md:text-[2.4vw]"
               style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 400' }}
             >
-              Deneyim<span className="inline-block text-blood ml-[0.16em] translate-y-[0.08em]">.</span>
+              Deneyim<span className="inline-block text-blood" style={{ marginLeft: '0.45em', transform: 'translateY(0.15em)' }}>.</span>
             </h3>
 
             <ol className="mt-10 relative border-l border-ink/15 pl-6 md:pl-10">
@@ -117,7 +117,7 @@ export default function Experience() {
               className="font-display text-[5.5vw] leading-[0.95] tracking-[-0.03em] opacity-0 md:text-[2.4vw]"
               style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 400' }}
             >
-              Eğitim<span className="inline-block text-blood ml-[0.16em] translate-y-[0.08em]">.</span>
+              Eğitim<span className="inline-block text-blood" style={{ marginLeft: '0.45em', transform: 'translateY(0.15em)' }}>.</span>
             </h3>
             <ol className="mt-10 space-y-8">
               {education.map((edu, i) => (
