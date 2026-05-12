@@ -1,13 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { inView, animate } from 'motion'
-import { projects } from '../data/projects'
+import { projects, otherWorkStats } from '../data/projects'
 import type { Project } from '../types'
-import ProjectLightbox from './ProjectLightbox'
 
 export default function Works() {
   const ref = useRef<HTMLElement>(null)
-  const [active, setActive] = useState<Project | null>(null)
-  const [hoverIndex, setHoverIndex] = useState<number | null>(null)
 
   useEffect(() => {
     const el = ref.current
@@ -16,14 +13,12 @@ export default function Works() {
       const lines = el.querySelectorAll<HTMLElement>('[data-line]')
       animate(
         lines,
-        { transform: ['translateY(60px)', 'translateY(0px)'], opacity: [0, 1] },
+        { transform: ['translateY(50px)', 'translateY(0px)'], opacity: [0, 1] },
         { duration: 1.0, delay: (i) => i * 0.06, ease: [0.16, 1, 0.3, 1] },
       )
     })
     return cleanup
   }, [])
-
-  const isEmpty = projects.length === 0
 
   return (
     <section
@@ -32,7 +27,8 @@ export default function Works() {
       className="relative bg-ink text-bone px-5 py-28 md:px-10 md:py-40"
     >
       <div className="mx-auto max-w-[1600px]">
-        <div className="mb-12 flex items-baseline justify-between md:mb-20">
+        {/* Section header */}
+        <div className="mb-20 flex items-baseline justify-between md:mb-32">
           <h2
             data-line
             className="font-mono text-[11px] uppercase tracking-[0.3em] text-bone/60 opacity-0"
@@ -40,114 +36,203 @@ export default function Works() {
             <span className="text-blood">§</span> 02 — Seçili Çalışmalar
           </h2>
           <span data-line className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40 opacity-0">
-            {isEmpty ? 'Yeni vitrin hazırlanıyor' : `${projects.length} proje`}
+            Öne çıkan 2 / 30+
           </span>
         </div>
 
-        {isEmpty ? (
-          <div data-line className="opacity-0">
-            <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-12">
-              <div className="md:col-span-8">
-                <p
-                  className="font-display text-[6vw] leading-[1.05] tracking-[-0.03em] md:text-[3.6vw]"
-                  style={{ fontVariationSettings: '"opsz" 144, "SOFT" 80, "wght" 360' }}
-                >
-                  <span className="block">Yeni vitrin</span>
-                  <span
-                    className="block italic text-bone/55"
-                    style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "WONK" 1' }}
-                  >
-                    hazırlık aşamasında
-                  </span>
-                </p>
-                <p className="mt-8 max-w-md text-[14.5px] leading-[1.6] text-bone/65">
-                  Önceki çalışmalar arşivde; seçilmiş yeni projeler kısa süre içinde yayında.
-                  Bu sürede belirli bir çalışma görmek isterseniz{' '}
-                  <a href="#contact" className="text-bone underline-link">
-                    iletişime geçebilirsiniz
-                  </a>
-                  .
-                </p>
-              </div>
+        {/* Featured projects */}
+        <div className="space-y-32 md:space-y-48">
+          {projects.map((p, i) => (
+            <FeaturedProject key={p.id} project={p} reverse={i % 2 === 1} />
+          ))}
+        </div>
 
-              <div className="md:col-span-4 md:flex md:items-end md:justify-end">
-                <div className="flex flex-col gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-bone/50">
-                  <div className="flex items-center justify-between gap-10 border-b border-bone/15 pb-3">
-                    <span>Durum</span>
-                    <span className="flex items-center gap-2 text-bone">
-                      <span className="relative inline-flex h-2 w-2">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blood opacity-60" />
-                        <span className="relative inline-flex h-2 w-2 rounded-full bg-blood" />
-                      </span>
-                      Hazırlanıyor
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between gap-10 border-b border-bone/15 pb-3">
-                    <span>Beklenen</span>
-                    <span className="text-bone">Yakında</span>
-                  </div>
-                  <div className="flex items-center justify-between gap-10">
-                    <span>Talep</span>
-                    <a href="#contact" className="text-bone underline-link">Yaz / Sor</a>
-                  </div>
-                </div>
+        {/* Other work stats */}
+        <div data-line className="mt-32 border-t border-bone/15 pt-14 opacity-0 md:mt-48">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-12">
+            <div className="md:col-span-3">
+              <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-bone/45">
+                Mobil uygulama
+              </div>
+              <div
+                className="mt-3 font-display leading-none tracking-[-0.04em]"
+                style={{
+                  fontSize: 'clamp(56px, 10vw, 120px)',
+                  fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 400',
+                }}
+              >
+                {otherWorkStats.mobileApps.replace('+', '')}
+                <span className="text-blood">+</span>
               </div>
             </div>
-          </div>
-        ) : (
-          <ul
-            className="relative divide-y divide-bone/10 border-y border-bone/10"
-            onMouseLeave={() => setHoverIndex(null)}
-          >
-            {projects.map((p, i) => (
-              <li
-                key={p.id}
-                data-line
-                className="group relative opacity-0"
-                onMouseEnter={() => setHoverIndex(i)}
+            <div className="md:col-span-3">
+              <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-bone/45">
+                Web sitesi
+              </div>
+              <div
+                className="mt-3 font-display leading-none tracking-[-0.04em]"
+                style={{
+                  fontSize: 'clamp(56px, 10vw, 120px)',
+                  fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 400',
+                }}
               >
-                <button
-                  data-cursor="view"
-                  onClick={() => setActive(p)}
-                  className="flex w-full items-baseline justify-between gap-6 py-7 text-left transition-colors md:py-10"
-                >
-                  <div className="flex items-baseline gap-5 md:gap-8">
-                    <span className="font-mono text-[11px] tracking-[0.25em] text-bone/50">{p.index}</span>
-                    <h3
-                      className="font-display text-[6.5vw] leading-[0.95] tracking-[-0.02em] md:text-[3.4vw] lg:text-[3vw] transition-all duration-500 group-hover:translate-x-2"
-                      style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 380' }}
-                    >
-                      {p.title}
-                    </h3>
-                  </div>
-                  <span className="hidden font-mono text-[10px] uppercase tracking-[0.25em] text-bone/45 md:block">
-                    {p.year} · {p.role}
-                  </span>
-                </button>
+                {otherWorkStats.websites.replace('+', '')}
+                <span className="text-blood">+</span>
+              </div>
+            </div>
+            <div className="md:col-span-6 md:pt-3">
+              <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-bone/45">
+                Notlar
+              </div>
+              <p className="mt-3 max-w-[460px] text-[14.5px] leading-[1.6] text-bone/70">
+                {otherWorkStats.note}
+              </p>
+              <a
+                href="#contact"
+                data-cursor="hover"
+                className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] underline-link"
+              >
+                Talep et / sor
+                <span aria-hidden>↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
 
-                {/* Floating preview image, follows hover */}
-                <div
-                  aria-hidden
-                  className={`pointer-events-none absolute right-[8vw] top-1/2 hidden h-[22vw] w-[18vw] -translate-y-1/2 overflow-hidden bg-bone-2 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] md:block ${
-                    hoverIndex === i
-                      ? 'opacity-100 scale-100 rotate-0'
-                      : 'opacity-0 scale-90 rotate-3'
-                  }`}
-                >
-                  <img
-                    src={p.cover}
-                    alt=""
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
+function FeaturedProject({ project, reverse }: { project: Project; reverse: boolean }) {
+  const isPortrait = project.coverAspect === 'portrait'
+  const imageAspect = isPortrait ? 'aspect-[3/4]' : 'aspect-square'
+
+  return (
+    <article className="group/proj">
+      <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-center md:gap-14">
+        {/* Image column */}
+        <div
+          data-line
+          className={`relative opacity-0 md:col-span-7 ${reverse ? 'md:order-2' : 'md:order-1'}`}
+        >
+          <a
+            href={project.link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor="view"
+            className="group block relative overflow-hidden bg-bone/5"
+          >
+            <div className={`relative w-full overflow-hidden ${imageAspect}`}>
+              <img
+                src={project.cover}
+                alt={`${project.title} cover`}
+                className={`absolute inset-0 h-full w-full transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] ${
+                  isPortrait ? 'object-cover object-top' : 'object-cover'
+                }`}
+                loading="lazy"
+              />
+              {/* Hover gradient + label */}
+              <div className="absolute inset-0 flex items-center justify-center bg-ink/55 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                <div className="flex flex-col items-center gap-2 text-bone">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em]">
+                    Canlı siteyi
+                  </span>
+                  <span className="font-display text-3xl italic">ziyaret et ↗</span>
                 </div>
+              </div>
+              {/* Top-left corner marker */}
+              <div className="absolute left-4 top-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-bone mix-blend-difference">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-blood" />
+                <span>Yayında</span>
+              </div>
+              {/* Bottom-right index */}
+              <div className="absolute right-4 bottom-4 font-mono text-[10px] uppercase tracking-[0.25em] text-bone mix-blend-difference">
+                N° {project.index}
+              </div>
+            </div>
+          </a>
+        </div>
+
+        {/* Info column */}
+        <div
+          data-line
+          className={`opacity-0 md:col-span-5 ${reverse ? 'md:order-1' : 'md:order-2'}`}
+        >
+          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-blood">
+            {project.index} — Öne çıkan çalışma
+          </div>
+
+          <h3
+            className="mt-5 font-display leading-[0.92] tracking-[-0.025em]"
+            style={{
+              fontSize: 'clamp(48px, 6vw, 90px)',
+              fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 400',
+            }}
+          >
+            {project.title}
+          </h3>
+
+          <p
+            className="mt-4 italic text-bone/55"
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(18px, 2vw, 24px)',
+              fontVariationSettings: '"opsz" 96, "SOFT" 90, "WONK" 1, "wght" 380',
+            }}
+          >
+            {project.tagline}
+          </p>
+
+          <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-[0.2em] text-bone/55">
+            <span>{project.year}</span>
+            <span className="text-bone/30">·</span>
+            <span>{project.role}</span>
+          </div>
+
+          <p className="mt-7 max-w-[460px] text-[14.5px] leading-[1.6] text-bone/75">
+            {project.description}
+          </p>
+
+          {project.highlights && project.highlights.length > 0 && (
+            <ul className="mt-6 space-y-1.5 text-[13.5px] text-bone/65">
+              {project.highlights.map((h, i) => (
+                <li key={i} className="relative pl-5 before:absolute before:left-0 before:top-2.5 before:h-px before:w-3 before:bg-blood/60">
+                  {h}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <ul className="mt-7 flex flex-wrap gap-1.5">
+            {project.stack.map((s) => (
+              <li
+                key={s}
+                className="rounded-full border border-bone/20 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-bone/75"
+              >
+                {s}
               </li>
             ))}
           </ul>
-        )}
-      </div>
 
-      {active && <ProjectLightbox project={active} onClose={() => setActive(null)} />}
-    </section>
+          <a
+            href={project.link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor="hover"
+            className="group/cta mt-10 inline-flex items-center gap-3 border-b border-bone/30 pb-2 hover:border-blood"
+          >
+            <span className="font-mono text-[11px] uppercase tracking-[0.25em]">
+              {project.link.label}
+            </span>
+            <span
+              aria-hidden
+              className="inline-block transition-transform duration-500 group-hover/cta:translate-x-1.5"
+            >
+              ↗
+            </span>
+          </a>
+        </div>
+      </div>
+    </article>
   )
 }

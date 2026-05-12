@@ -2,16 +2,17 @@ export type Project = {
   id: string
   index: string
   title: string
-  subtitle: string
+  tagline: string
   year: string
   role: string
   stack: string[]
   status: 'live' | 'paused' | 'inDev' | 'private'
   description: string
+  highlights?: string[]
   cover: string
-  gallery: string[]
-  videos?: string[]
-  link?: { label: string; href: string }
+  coverAspect?: 'square' | 'portrait'
+  gallery?: string[]
+  link: { label: string; href: string }
 }
 
 export type Experience = {
