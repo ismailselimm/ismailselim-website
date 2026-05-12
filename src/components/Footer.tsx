@@ -22,17 +22,21 @@ export default function Footer() {
 
   return (
     <footer className="bg-ink text-bone px-5 pb-10 md:px-10">
-      {/* Wordmark */}
+      {/* Wordmark — mobilde stack, sm+'dan itibaren inline */}
       <div className="overflow-hidden border-t border-bone/15 pt-10">
         <div
           aria-hidden
-          className="select-none whitespace-nowrap text-center font-display leading-none tracking-[-0.04em]"
+          className="select-none text-center font-display leading-[0.95] tracking-[-0.04em]"
           style={{
-            fontSize: 'clamp(38px, 11.5vw, 150px)',
+            fontSize: 'clamp(44px, 9vw, 140px)',
             fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 400',
           }}
         >
-          İSMAİL <span className="italic text-blood">SELİM</span> GARİP
+          <span className="block sm:inline">İSMAİL</span>
+          {' '}
+          <span className="block sm:inline italic text-blood">SELİM</span>
+          {' '}
+          <span className="block sm:inline">GARİP</span>
         </div>
       </div>
 

@@ -80,10 +80,6 @@ export default function About() {
                 className="absolute inset-0 h-full w-full object-cover grayscale transition-all duration-700 hover:grayscale-0"
                 loading="lazy"
               />
-              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-bone mix-blend-difference">
-                <span>İSG / 2026</span>
-                <span>● kayıtta</span>
-              </div>
             </div>
 
             <div className="space-y-4 text-[14.5px] leading-[1.65] text-ink/75 md:max-w-[360px] md:ml-auto md:text-right">
