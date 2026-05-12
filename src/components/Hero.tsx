@@ -18,8 +18,8 @@ export default function Hero() {
 
     animate(
       words,
-      { transform: ['translateY(110%) rotate(8deg)', 'translateY(0%) rotate(0deg)'], opacity: [0, 1] },
-      { duration: 1.1, delay: stagger(0.07, { startDelay: 0.15 }), ease: [0.16, 1, 0.3, 1] },
+      { transform: ['translateY(50px)', 'translateY(0px)'], opacity: [0, 1] },
+      { duration: 1.0, delay: stagger(0.08, { startDelay: 0.2 }), ease: [0.16, 1, 0.3, 1] },
     )
     animate(
       meta,
@@ -64,44 +64,32 @@ export default function Hero() {
 
       {/* Main display headline */}
       <div className="mx-auto mt-14 max-w-[1600px] px-5 md:mt-20 md:px-10">
-        <h1 className="font-display text-balance text-[8.5vw] leading-[0.95] tracking-[-0.03em] md:text-[6.4vw] lg:text-[5.8vw]">
-          <span className="inline-block overflow-hidden align-top">
-            <span data-reveal-word className="inline-block opacity-0">Mobil</span>
-          </span>{' '}
-          <span className="inline-block overflow-hidden align-top">
-            <span
-              data-reveal-word
-              className="inline-block italic opacity-0 wonk"
-              style={{ fontVariationSettings: '"opsz" 144, "SOFT" 90, "WONK" 1, "wght" 380' }}
-            >
-              ürünleri
-            </span>
+        <h1 className="font-display text-balance text-[8.5vw] leading-[1.05] tracking-[-0.03em] md:text-[6.4vw] lg:text-[5.8vw]">
+          <span data-reveal-word className="inline-block opacity-0">Mobil</span>{' '}
+          <span
+            data-reveal-word
+            className="inline-block italic opacity-0 wonk"
+            style={{ fontVariationSettings: '"opsz" 144, "SOFT" 90, "WONK" 1, "wght" 380' }}
+          >
+            ürünleri
           </span>
           <br />
-          <span className="inline-block overflow-hidden align-top">
-            <span data-reveal-word className="inline-block opacity-0">fikirden</span>
-          </span>{' '}
-          <span className="inline-block overflow-hidden align-top">
-            <span
-              data-reveal-word
-              className="inline-block opacity-0"
-              style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 700' }}
-            >
-              mağazaya
-            </span>
+          <span data-reveal-word className="inline-block opacity-0">fikirden</span>{' '}
+          <span
+            data-reveal-word
+            className="inline-block opacity-0"
+            style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 700' }}
+          >
+            mağazaya
           </span>
           <br />
-          <span className="inline-block overflow-hidden align-top">
-            <span data-reveal-word className="inline-block opacity-0">tek elden</span>
-          </span>{' '}
-          <span className="inline-block overflow-hidden align-top">
-            <span
-              data-reveal-word
-              className="inline-block italic opacity-0"
-              style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "wght" 400' }}
-            >
-              kuruyorum<span className="not-italic text-blood ml-[0.08em]">.</span>
-            </span>
+          <span data-reveal-word className="inline-block opacity-0">tek elden</span>{' '}
+          <span
+            data-reveal-word
+            className="inline-block italic opacity-0"
+            style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "wght" 400' }}
+          >
+            kuruyorum<span className="inline-block not-italic text-blood ml-[0.16em] translate-y-[0.08em]">.</span>
           </span>
         </h1>
       </div>

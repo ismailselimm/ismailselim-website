@@ -16,7 +16,7 @@ const marqueeItems = [
   'Mobil',
   'Next.js',
   'TypeScript',
-  'Figma',
+  'Tasarım',
   'App Store',
   'Google Play',
   'UI',

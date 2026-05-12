@@ -33,16 +33,12 @@ export default function Experience() {
           >
             <span className="text-blood">§</span> 03 — Özgeçmiş
           </h2>
-          <a
+          <span
             data-line
-            href="/cv/IsmailSelimGarip-CV.pdf"
-            target="_blank"
-            data-cursor="hover"
-            className="group inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] opacity-0 underline-link"
+            className="font-mono text-[10px] uppercase tracking-[0.3em] text-mute opacity-0"
           >
-            CV indir
-            <span className="inline-block transition-transform group-hover:translate-y-0.5">↓</span>
-          </a>
+            2021 — şimdi
+          </span>
         </div>
 
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-12">
@@ -53,7 +49,7 @@ export default function Experience() {
               className="font-display text-[5.5vw] leading-[0.95] tracking-[-0.03em] opacity-0 md:text-[2.4vw]"
               style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 400' }}
             >
-              Deneyim<span className="text-blood ml-[0.08em]">.</span>
+              Deneyim<span className="inline-block text-blood ml-[0.16em] translate-y-[0.08em]">.</span>
             </h3>
 
             <ol className="mt-10 relative border-l border-ink/15 pl-6 md:pl-10">
@@ -121,7 +117,7 @@ export default function Experience() {
               className="font-display text-[5.5vw] leading-[0.95] tracking-[-0.03em] opacity-0 md:text-[2.4vw]"
               style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 400' }}
             >
-              Eğitim<span className="text-blood ml-[0.08em]">.</span>
+              Eğitim<span className="inline-block text-blood ml-[0.16em] translate-y-[0.08em]">.</span>
             </h3>
             <ol className="mt-10 space-y-8">
               {education.map((edu, i) => (

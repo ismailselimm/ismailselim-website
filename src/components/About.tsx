@@ -88,15 +88,15 @@ export default function About() {
 
             <div className="space-y-4 text-[14.5px] leading-[1.65] text-ink/75 md:max-w-[360px] md:ml-auto md:text-right">
               <p data-line className="opacity-0">
-                Öğrencilik döneminde mobil geliştirmeye başladım; App Store ve
-                Google Play'de birden fazla uygulamayı yayına aldım. O günden bu yana
-                Flutter ve Firebase üzerine yoğunlaşıyorum.
+                Öğrencilik döneminde mobil geliştirmeye başladım. Bugüne kadar
+                App Store ve Google Play'de 10'u aşkın uygulamayı yayına aldım;
+                aktif olarak yenilerini de yayınlamaya devam ediyorum.
               </p>
               <p data-line className="opacity-0">
-                Arayüz tasarımından backend mimarisine, mağaza onayından sürüm yönetimine
-                kadar bir mobil ürünün yaşam döngüsündeki her aşamada sorumluluk alıyorum.
-                Temiz kod, kullanıcı deneyimi ve performans birbirinden ayrı işler değil
-                — aynı disiplinin parçaları.
+                Arayüzden backend mimarisine, mağaza onayından sürüm yönetimine kadar
+                bir ürünün her aşamasında sorumluluk alıyorum. Temiz kod,
+                kullanıcı deneyimi ve performans birbirinden ayrı değil — aynı
+                disiplinin parçaları.
               </p>
               <p data-line className="font-mono text-[11px] uppercase tracking-[0.2em] text-mute opacity-0">
                 <span className="text-blood">↳</span> Web & mobil — uçtan uca
