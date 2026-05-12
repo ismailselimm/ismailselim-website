@@ -59,17 +59,17 @@ export default function Experience() {
                   data-line
                   className="relative pb-12 opacity-0 last:pb-0"
                 >
-                  {/* Marker */}
+                  {/* Marker — timeline çizgisi üzerinde, şirket adından uzak */}
                   <span
                     aria-hidden
-                    className={`absolute -left-[7px] top-1.5 h-3 w-3 rounded-full border-2 border-bone md:-left-[12px] md:h-4 md:w-4 ${
+                    className={`absolute top-1.5 h-3 w-3 rounded-full border-2 border-bone -left-[30px] md:h-4 md:w-4 md:-left-[48px] ${
                       exp.current ? 'bg-blood' : 'bg-ink'
                     }`}
                   />
                   {exp.current && (
                     <span
                       aria-hidden
-                      className="absolute -left-[14px] top-0.5 inline-flex h-5 w-5 animate-ping rounded-full bg-blood opacity-40 md:-left-[19px] md:h-7 md:w-7"
+                      className="absolute top-0.5 inline-flex h-5 w-5 animate-ping rounded-full bg-blood opacity-40 -left-[34px] md:h-7 md:w-7 md:-left-[54px]"
                     />
                   )}
 
