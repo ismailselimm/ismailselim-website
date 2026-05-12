@@ -99,7 +99,7 @@ export default function About() {
                 — aynı disiplinin parçaları.
               </p>
               <p data-line className="font-mono text-[11px] uppercase tracking-[0.2em] text-mute opacity-0">
-                <span className="text-blood">↳</span> Freelance & iş birliklerine açık
+                <span className="text-blood">↳</span> Web & mobil — uçtan uca
               </p>
             </div>
           </div>

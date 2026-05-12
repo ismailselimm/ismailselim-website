@@ -64,7 +64,7 @@ export default function Hero() {
 
       {/* Main display headline */}
       <div className="mx-auto mt-14 max-w-[1600px] px-5 md:mt-20 md:px-10">
-        <h1 className="font-display text-balance text-[12vw] leading-[0.92] tracking-[-0.035em] md:text-[8.6vw] lg:text-[7.6vw]">
+        <h1 className="font-display text-balance text-[8.5vw] leading-[0.95] tracking-[-0.03em] md:text-[6.4vw] lg:text-[5.8vw]">
           <span className="inline-block overflow-hidden align-top">
             <span data-reveal-word className="inline-block opacity-0">Mobil</span>
           </span>{' '}
@@ -100,7 +100,7 @@ export default function Hero() {
               className="inline-block italic opacity-0"
               style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "wght" 400' }}
             >
-              kuruyorum<span className="not-italic text-blood">.</span>
+              kuruyorum<span className="not-italic text-blood ml-[0.08em]">.</span>
             </span>
           </span>
         </h1>
@@ -112,9 +112,10 @@ export default function Hero() {
           data-reveal-meta
           className="max-w-md text-[14.5px] leading-[1.55] text-ink/70 opacity-0 md:text-[15.5px]"
         >
-          Flutter ve Firebase ile mobil ürünler geliştiren bir yazılım mühendisiyim.
-          Tasarımdan mağaza yayınına kadar tüm süreci uçtan uca yürütürüm.
-          Şu an <span className="text-ink underline-link">BaremCars</span> bünyesinde görev alıyorum; yeni iş birliklerine açığım.
+          Web ve mobil tarafta uçtan uca ürün geliştiren bir yazılım geliştiricisiyim.
+          Tasarımdan kodlamaya, mağaza yayınından bakım sürecine kadar bir ürünü
+          baştan sona kurarım. Şu an <span className="text-ink underline-link">BaremCars</span>
+          {' '}bünyesinde aktif olarak çalışıyorum.
         </p>
 
         <div
@@ -144,12 +145,12 @@ export default function Hero() {
 
       {/* Bottom editorial info grid */}
       <div className="mx-auto mt-16 max-w-[1600px] border-t border-ink/15 px-5 md:mt-24 md:px-10">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-6 py-7 md:grid-cols-4 md:gap-x-10">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-6 py-7 md:grid-cols-3 md:gap-x-10">
           <div data-reveal-grid className="opacity-0">
             <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-mute">Şu an</div>
             <div className="mt-2 text-[15px] leading-tight">
-              <span className="block">BaremCars,</span>
-              <span className="block text-ink/60">Mobil Uygulama Geliştirici</span>
+              <span className="block">BaremCars</span>
+              <span className="block text-ink/60">Tam zamanlı görevdeyim</span>
             </div>
           </div>
           <div data-reveal-grid className="opacity-0">
@@ -159,21 +160,11 @@ export default function Hero() {
               <span className="block text-ink/60">41° 0' N, 28° 58' E</span>
             </div>
           </div>
-          <div data-reveal-grid className="opacity-0">
-            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-mute">Müsaitlik</div>
-            <div className="mt-2 flex items-center gap-2 text-[15px] leading-tight">
-              <span className="relative inline-flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-60" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
-              <span>Yeni işlere açık</span>
-            </div>
-          </div>
-          <div data-reveal-grid className="opacity-0">
-            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-mute">Stack</div>
+          <div data-reveal-grid className="opacity-0 col-span-2 md:col-span-1">
+            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-mute">Alan</div>
             <div className="mt-2 text-[15px] leading-tight">
-              <span className="block">Flutter / Dart / Firebase</span>
-              <span className="block text-ink/60">React • Next.js • TypeScript</span>
+              <span className="block">Web ve mobil ürün geliştirme</span>
+              <span className="block text-ink/60">Tasarımdan yayına, uçtan uca</span>
             </div>
           </div>
         </div>
