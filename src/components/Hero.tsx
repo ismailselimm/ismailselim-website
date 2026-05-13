@@ -65,31 +65,31 @@ export default function Hero() {
       {/* Main display headline */}
       <div className="mx-auto mt-14 max-w-[1600px] px-5 md:mt-20 md:px-10">
         <h1 className="font-display text-balance text-[8.5vw] leading-[1.05] tracking-[-0.03em] md:text-[6.4vw] lg:text-[5.8vw]">
-          <span data-reveal-word className="inline-block opacity-0">Mobil</span>{' '}
+          <span data-reveal-word className="inline-block opacity-0">Web</span>{' '}
+          <span data-reveal-word className="inline-block opacity-0">ve</span>{' '}
+          <span data-reveal-word className="inline-block opacity-0">mobil</span>
+          <br />
           <span
             data-reveal-word
             className="inline-block italic opacity-0 wonk"
             style={{ fontVariationSettings: '"opsz" 144, "SOFT" 90, "WONK" 1, "wght" 380' }}
           >
-            ürünleri
+            ürünleri,
           </span>
           <br />
-          <span data-reveal-word className="inline-block opacity-0">fikirden</span>{' '}
           <span
             data-reveal-word
             className="inline-block opacity-0"
             style={{ fontVariationSettings: '"opsz" 144, "SOFT" 30, "wght" 700' }}
           >
-            mağazaya
-          </span>
-          <br />
-          <span data-reveal-word className="inline-block opacity-0">tek elden</span>{' '}
+            uçtan uca
+          </span>{' '}
           <span
             data-reveal-word
             className="inline-block italic opacity-0"
             style={{ fontVariationSettings: '"opsz" 144, "SOFT" 100, "wght" 400' }}
           >
-            kuruyorum
+            kuruyorum.
           </span>
         </h1>
       </div>
