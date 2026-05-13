@@ -41,16 +41,6 @@ export const experiences: Experience[] = [
       'UI optimizasyonları, cache yönetimi, asenkron veri işleme yapısı.',
     ],
   },
-  {
-    company: 'Freelance',
-    title: 'Yazılım Geliştirici',
-    dateRange: 'Eylül 2022 — Eylül 2025',
-    bullets: [
-      'Flutter & Firebase ile çeşitli mobil uygulamalar.',
-      'Yayında olan mobil uygulamaların sürüm kontrol ve güncellemeleri.',
-      '10\'dan fazla kurumsal/kişisel web sitesi geliştirme ve bakım.',
-    ],
-  },
 ]
 
 export const education = [
