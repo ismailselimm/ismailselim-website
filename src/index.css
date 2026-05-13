@@ -133,6 +133,9 @@
     animation: marquee 38s linear infinite;
     will-change: transform;
   }
+  @media (max-width: 768px) {
+    .animate-marquee { animation-duration: 18s; }
+  }
 
   /* Blink */
   @keyframes blink {

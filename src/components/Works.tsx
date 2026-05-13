@@ -68,7 +68,7 @@ export default function Works() {
 
         {/* Other work stats */}
         <div data-line className="mt-32 border-t border-bone/15 pt-14 opacity-0 md:mt-48">
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-12">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-12 md:gap-12">
             <div className="md:col-span-3">
               <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-bone/45">
                 Mobil uygulama
@@ -99,7 +99,7 @@ export default function Works() {
                 <span className="text-blood">+</span>
               </div>
             </div>
-            <div className="md:col-span-6 md:pt-3">
+            <div className="col-span-2 md:col-span-6 md:pt-3">
               <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-bone/45">
                 Notlar
               </div>

@@ -54,12 +54,6 @@ export default function Hero() {
         >
           Portföy <span className="mx-2 text-blood">●</span> İstanbul, Türkiye
         </div>
-        <div
-          data-reveal-meta
-          className="hidden font-mono text-[10px] uppercase tracking-[0.3em] text-mute opacity-0 sm:block"
-        >
-          Bilgisayar Mühendisi · Yazılım Geliştirici
-        </div>
       </div>
 
       {/* Main display headline */}
@@ -128,33 +122,6 @@ export default function Hero() {
           >
             <span className="font-mono text-[11px] uppercase tracking-[0.2em] underline-link">Çalışmaları gör</span>
           </MagneticButton>
-        </div>
-      </div>
-
-      {/* Bottom editorial info grid */}
-      <div className="mx-auto mt-16 max-w-[1600px] border-t border-ink/15 px-5 md:mt-24 md:px-10">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-6 py-7 md:grid-cols-3 md:gap-x-10">
-          <div data-reveal-grid className="opacity-0">
-            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-mute">Şu an</div>
-            <div className="mt-2 text-[15px] leading-tight">
-              <span className="block">Barem Cars</span>
-              <span className="block text-ink/60">Tam zamanlı görevdeyim</span>
-            </div>
-          </div>
-          <div data-reveal-grid className="opacity-0">
-            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-mute">Konum</div>
-            <div className="mt-2 text-[15px] leading-tight">
-              <span className="block">İstanbul, Türkiye</span>
-              <span className="block text-ink/60">41° 0' N, 28° 58' E</span>
-            </div>
-          </div>
-          <div data-reveal-grid className="opacity-0 col-span-2 md:col-span-1">
-            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-mute">Alan</div>
-            <div className="mt-2 text-[15px] leading-tight">
-              <span className="block">Web ve mobil ürün geliştirme</span>
-              <span className="block text-ink/60">Tasarımdan yayına, uçtan uca</span>
-            </div>
-          </div>
         </div>
       </div>
 
