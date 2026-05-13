@@ -46,13 +46,19 @@ export default function Hero() {
       id="hero"
       className="relative overflow-hidden pt-28 pb-12 md:min-h-screen md:pt-32 md:pb-0"
     >
-      {/* Top editorial strip */}
-      <div className="mx-auto flex max-w-[1600px] items-center justify-between px-5 md:px-10">
+      {/* Top editorial strip — mobilde stack, md+'da satır */}
+      <div className="mx-auto flex max-w-[1600px] flex-col gap-1.5 px-5 md:flex-row md:items-center md:justify-between md:gap-3 md:px-10">
         <div
           data-reveal-meta
-          className="font-mono text-[10px] uppercase tracking-[0.3em] text-mute opacity-0"
+          className="font-mono text-[9px] uppercase tracking-[0.25em] text-mute opacity-0 md:text-[10px] md:tracking-[0.3em]"
         >
           Portföy <span className="mx-2 text-blood">●</span> İstanbul, Türkiye
+        </div>
+        <div
+          data-reveal-meta
+          className="font-mono text-[9px] uppercase tracking-[0.25em] text-mute opacity-0 md:text-[10px] md:tracking-[0.3em]"
+        >
+          Bilgisayar Mühendisi · Yazılım Geliştirici
         </div>
       </div>
 
