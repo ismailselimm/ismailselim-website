@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
-import { inView, animate } from 'motion'
 import MagneticButton from './MagneticButton'
+import { useRevealOnScroll } from '../hooks/useRevealOnScroll'
+import SectionHeader from './SectionHeader'
 
 const EMAIL = 'ismailselimgarip@gmail.com'
 
@@ -11,21 +11,7 @@ const socials = [
 ]
 
 export default function Contact() {
-  const ref = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const cleanup = inView(el, () => {
-      const lines = el.querySelectorAll<HTMLElement>('[data-line]')
-      animate(
-        lines,
-        { transform: ['translateY(50px)', 'translateY(0px)'], opacity: [0, 1] },
-        { duration: 1.0, delay: (i) => i * 0.08, ease: [0.16, 1, 0.3, 1] },
-      )
-    })
-    return cleanup
-  }, [])
+  const ref = useRevealOnScroll<HTMLElement>({ distance: 50, stagger: 0.08 })
 
   return (
     <section
@@ -34,17 +20,13 @@ export default function Contact() {
       className="relative bg-ink text-bone px-5 py-28 md:px-10 md:py-40"
     >
       <div className="mx-auto max-w-[1600px]">
-        <div className="mb-12 flex items-baseline justify-between md:mb-20">
-          <h2
-            data-line
-            className="font-mono text-[11px] uppercase tracking-[0.3em] text-bone/60 opacity-0"
-          >
-            <span className="text-blood">§</span> 04 — İletişim
-          </h2>
-          <span data-line className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40 opacity-0">
-            yanıt 24 saat içinde
-          </span>
-        </div>
+        <SectionHeader
+          number="04"
+          title="İletişim"
+          meta="yanıt 24 saat içinde"
+          tone="dark"
+          className="mb-12 md:mb-20"
+        />
 
         <div className="grid grid-cols-1 gap-14 md:grid-cols-12">
           <div className="md:col-span-8">

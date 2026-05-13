@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { inView, animate } from 'motion'
+import { inView } from 'motion'
 import { projects, otherWorkStats } from '../data/projects'
 import type { Project } from '../types'
 import Lightbox from './Lightbox'
+import { useRevealOnScroll } from '../hooks/useRevealOnScroll'
+import SectionHeader from './SectionHeader'
 
 type LightboxState = {
   images: string[]
@@ -13,23 +15,15 @@ type LightboxState = {
 const AUTOPLAY_MS = 2400
 const POST_INTERACTION_PAUSE_MS = 5000
 
-export default function Works() {
-  const ref = useRef<HTMLElement>(null)
-  const [lightbox, setLightbox] = useState<LightboxState>(null)
+const ASPECT_MAP = {
+  portrait: 'aspect-[3/4]',
+  landscape: 'aspect-[16/10]',
+  square: 'aspect-square',
+} as const
 
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const cleanup = inView(el, () => {
-      const lines = el.querySelectorAll<HTMLElement>('[data-line]')
-      animate(
-        lines,
-        { transform: ['translateY(50px)', 'translateY(0px)'], opacity: [0, 1] },
-        { duration: 1.0, delay: (i) => i * 0.06, ease: [0.16, 1, 0.3, 1] },
-      )
-    })
-    return cleanup
-  }, [])
+export default function Works() {
+  const ref = useRevealOnScroll<HTMLElement>({ distance: 50, stagger: 0.06 })
+  const [lightbox, setLightbox] = useState<LightboxState>(null)
 
   return (
     <section
@@ -38,20 +32,14 @@ export default function Works() {
       className="relative bg-ink text-bone px-5 py-28 md:px-10 md:py-40"
     >
       <div className="mx-auto max-w-[1600px]">
-        {/* Section header */}
-        <div className="mb-20 flex items-baseline justify-between md:mb-32">
-          <h2
-            data-line
-            className="font-mono text-[11px] uppercase tracking-[0.3em] text-bone/60 opacity-0"
-          >
-            <span className="text-blood">§</span> 02 — Seçili Çalışmalar
-          </h2>
-          <span data-line className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone/40 opacity-0">
-            Öne çıkan 2 / 30+
-          </span>
-        </div>
+        <SectionHeader
+          number="02"
+          title="Seçili Çalışmalar"
+          meta="Öne çıkan 2 / 30+"
+          tone="dark"
+          className="mb-20 md:mb-32"
+        />
 
-        {/* Featured projects */}
         <div className="space-y-32 md:space-y-48">
           {projects.map((p, i) => (
             <FeaturedProject
@@ -66,7 +54,6 @@ export default function Works() {
           ))}
         </div>
 
-        {/* Other work stats */}
         <div data-line className="mt-32 border-t border-bone/15 pt-14 opacity-0 md:mt-48">
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-12 md:gap-12">
             <div className="md:col-span-3">
@@ -139,29 +126,36 @@ type FeaturedProps = {
 
 function FeaturedProject({ project, reverse, onOpenGallery }: FeaturedProps) {
   const aspect = project.coverAspect ?? 'square'
-  const aspectClass =
-    aspect === 'portrait'
-      ? 'aspect-[3/4]'
-      : aspect === 'landscape'
-      ? 'aspect-[16/10]'
-      : 'aspect-square'
+  const aspectClass = ASPECT_MAP[aspect]
   const fit = aspect === 'portrait' ? 'object-cover object-top' : 'object-cover'
 
-  // Build the image set — prefer gallery if it exists, otherwise use just cover
-  const images = project.gallery && project.gallery.length > 0
-    ? project.gallery
-    : [project.cover]
+  const images =
+    project.gallery && project.gallery.length > 0 ? project.gallery : [project.cover]
   const hasGallery = images.length > 1
 
   const [activeIdx, setActiveIdx] = useState(0)
   const [hovering, setHovering] = useState(false)
   const pauseUntilRef = useRef(0)
   const stripRef = useRef<HTMLDivElement>(null)
+  const articleRef = useRef<HTMLElement>(null)
+  const inViewRef = useRef(false)
 
-  // Autoplay
+  // Pause autoplay when this card scrolls offscreen
+  useEffect(() => {
+    const el = articleRef.current
+    if (!el) return
+    return inView(el, () => {
+      inViewRef.current = true
+      return () => {
+        inViewRef.current = false
+      }
+    })
+  }, [])
+
   useEffect(() => {
     if (!hasGallery || hovering) return
     const id = window.setInterval(() => {
+      if (!inViewRef.current) return
       if (Date.now() < pauseUntilRef.current) return
       setActiveIdx((i) => (i + 1) % images.length)
     }, AUTOPLAY_MS)
@@ -186,9 +180,8 @@ function FeaturedProject({ project, reverse, onOpenGallery }: FeaturedProps) {
   }
 
   return (
-    <article>
+    <article ref={articleRef}>
       <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:items-center md:gap-14">
-        {/* Image column */}
         <div
           data-line
           className={`opacity-0 md:col-span-7 ${reverse ? 'md:order-2' : 'md:order-1'}`}
@@ -198,7 +191,6 @@ function FeaturedProject({ project, reverse, onOpenGallery }: FeaturedProps) {
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
           >
-            {/* Cover stage — stacked images, click opens lightbox */}
             <div
               role="button"
               tabIndex={0}
@@ -214,7 +206,6 @@ function FeaturedProject({ project, reverse, onOpenGallery }: FeaturedProps) {
               aria-label={`${project.title} galerisini aç`}
             >
               <div className="relative h-full w-full">
-                {/* Image stack — crossfade */}
                 {images.map((img, i) => (
                   <img
                     key={img}
@@ -227,33 +218,26 @@ function FeaturedProject({ project, reverse, onOpenGallery }: FeaturedProps) {
                   />
                 ))}
 
-                {/* Subtle Ken Burns scale on active image — extra polish */}
-                <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.02]" />
-
-                {/* Top-left status */}
                 <div className="absolute left-4 top-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-bone mix-blend-difference md:left-5 md:top-5">
                   <span className="inline-block h-1.5 w-1.5 rounded-full bg-blood" />
                   <span>Yayında</span>
                 </div>
 
-                {/* Counter top-right */}
                 {hasGallery && (
                   <div className="absolute right-4 top-4 font-mono text-[10px] uppercase tracking-[0.25em] text-bone mix-blend-difference md:right-5 md:top-5">
                     {String(activeIdx + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
                   </div>
                 )}
 
-                {/* N° in bottom-right (above gradient) */}
                 <div className="absolute right-4 bottom-3 z-20 font-mono text-[10px] uppercase tracking-[0.25em] text-bone mix-blend-difference md:right-5 md:bottom-5">
                   N° {project.index}
                 </div>
 
-                {/* Bottom gradient for thumb strip legibility */}
+                {/* Gradient gives thumb strip legibility on any image */}
                 {hasGallery && (
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink/90 via-ink/50 to-transparent md:h-40" />
                 )}
 
-                {/* Hover overlay — "galeriyi aç" */}
                 <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-ink/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                   <div className="flex flex-col items-center gap-2 text-bone">
                     <span className="font-mono text-[10px] uppercase tracking-[0.3em]">
@@ -270,7 +254,6 @@ function FeaturedProject({ project, reverse, onOpenGallery }: FeaturedProps) {
               </div>
             </div>
 
-            {/* Thumb strip overlay — sibling of cover, absolute over bottom */}
             {hasGallery && (
               <div className="absolute inset-x-0 bottom-3 z-30 md:bottom-5">
                 <div
@@ -303,7 +286,6 @@ function FeaturedProject({ project, reverse, onOpenGallery }: FeaturedProps) {
               </div>
             )}
 
-            {/* Pause indicator (subtle dot pulsing) — visual hint that it's autoplay */}
             {hasGallery && (
               <div className="pointer-events-none absolute right-4 bottom-12 z-20 flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.25em] text-bone/60 mix-blend-difference md:right-5 md:bottom-16">
                 {hovering ? (
@@ -325,7 +307,6 @@ function FeaturedProject({ project, reverse, onOpenGallery }: FeaturedProps) {
           </div>
         </div>
 
-        {/* Info column */}
         <div
           data-line
           className={`opacity-0 md:col-span-5 ${reverse ? 'md:order-1' : 'md:order-2'}`}

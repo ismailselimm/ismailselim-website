@@ -6,7 +6,7 @@ export type Project = {
   year: string
   role: string
   stack: string[]
-  status: 'live' | 'paused' | 'inDev' | 'private'
+  status?: 'live' | 'paused' | 'inDev' | 'private'
   description: string
   highlights?: string[]
   cover: string
@@ -21,10 +21,4 @@ export type Experience = {
   dateRange: string
   current?: boolean
   bullets: string[]
-}
-
-export type Skill = {
-  name: string
-  level: number
-  category: 'core' | 'web' | 'data' | 'tools'
 }

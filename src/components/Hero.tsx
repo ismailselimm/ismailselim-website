@@ -44,7 +44,7 @@ export default function Hero() {
     <section
       ref={rootRef}
       id="hero"
-      className="relative min-h-screen overflow-hidden pt-28 md:pt-32"
+      className="relative overflow-hidden pt-28 pb-12 md:min-h-screen md:pt-32 md:pb-0"
     >
       {/* Top editorial strip */}
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-5 md:px-10">

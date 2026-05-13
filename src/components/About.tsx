@@ -1,30 +1,25 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { inView, animate } from 'motion'
+import { useRevealOnScroll } from '../hooks/useRevealOnScroll'
+import SectionHeader from './SectionHeader'
 
 export default function About() {
-  const ref = useRef<HTMLElement>(null)
+  const ref = useRevealOnScroll<HTMLElement>({ distance: 40, stagger: 0.08 })
 
+  // Photo gets its own scale-in animation alongside the default reveal
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    const cleanup = inView(el, () => {
-      const lines = el.querySelectorAll<HTMLElement>('[data-line]')
+    return inView(el, () => {
       const photo = el.querySelector<HTMLElement>('[data-photo]')
+      if (!photo) return
       animate(
-        lines,
-        { transform: ['translateY(40px)', 'translateY(0px)'], opacity: [0, 1] },
-        { duration: 1.0, delay: (i) => i * 0.08, ease: [0.16, 1, 0.3, 1] },
+        photo,
+        { transform: ['scale(0.9)', 'scale(1)'], opacity: [0, 1] },
+        { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
       )
-      if (photo) {
-        animate(
-          photo,
-          { transform: ['scale(0.9)', 'scale(1)'], opacity: [0, 1] },
-          { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
-        )
-      }
     })
-    return cleanup
-  }, [])
+  }, [ref])
 
   return (
     <section
@@ -33,17 +28,7 @@ export default function About() {
       className="relative px-5 py-28 md:px-10 md:py-40"
     >
       <div className="mx-auto max-w-[1600px]">
-        <div className="mb-14 flex items-baseline justify-between md:mb-20">
-          <h2
-            data-line
-            className="font-mono text-[11px] uppercase tracking-[0.3em] text-mute opacity-0"
-          >
-            <span className="text-blood">§</span> 01 — Hakkımda
-          </h2>
-          <span data-line className="font-mono text-[10px] uppercase tracking-[0.3em] text-mute opacity-0">
-            ismailselim.dev
-          </span>
-        </div>
+        <SectionHeader number="01" title="Hakkımda" meta="ismailselim.dev" />
 
         <div className="grid grid-cols-1 gap-14 md:grid-cols-12 md:items-center md:gap-12">
           {/* Pull quote */}

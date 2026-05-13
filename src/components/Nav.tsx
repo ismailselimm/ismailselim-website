@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useIstanbulClock } from '../hooks/useIstanbulClock'
 
 const links = [
   { label: 'Hakkımda', href: '#about' },
@@ -9,24 +10,8 @@ const links = [
 ]
 
 export default function Nav() {
-  const [time, setTime] = useState<string>('')
+  const time = useIstanbulClock()
   const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const tick = () => {
-      const fmt = new Intl.DateTimeFormat('tr-TR', {
-        timeZone: 'Europe/Istanbul',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false,
-      })
-      setTime(fmt.format(new Date()))
-    }
-    tick()
-    const id = setInterval(tick, 1000)
-    return () => clearInterval(id)
-  }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)

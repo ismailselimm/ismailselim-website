@@ -1,24 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useIstanbulClock } from '../hooks/useIstanbulClock'
 
 export default function Footer() {
-  const [time, setTime] = useState('')
-
-  useEffect(() => {
-    const tick = () => {
-      setTime(
-        new Intl.DateTimeFormat('tr-TR', {
-          timeZone: 'Europe/Istanbul',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false,
-        }).format(new Date()),
-      )
-    }
-    tick()
-    const id = setInterval(tick, 1000)
-    return () => clearInterval(id)
-  }, [])
+  const time = useIstanbulClock()
 
   return (
     <footer className="bg-ink text-bone px-5 pb-10 md:px-10">

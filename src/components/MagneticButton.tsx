@@ -31,10 +31,8 @@ export default function MagneticButton({
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
 
     let raf = 0
-    let tx = 0
-    let ty = 0
-    let itx = 0
-    let ity = 0
+    let tx = 0, ty = 0, itx = 0, ity = 0
+    let curX = 0, curY = 0, iCurX = 0, iCurY = 0
 
     const handleMove = (e: MouseEvent) => {
       const rect = el.getBoundingClientRect()
@@ -46,25 +44,15 @@ export default function MagneticButton({
       ity = y * strength * 0.5
     }
     const handleLeave = () => {
-      tx = 0
-      ty = 0
-      itx = 0
-      ity = 0
+      tx = ty = itx = ity = 0
     }
     const tick = () => {
-      const cur = el.style.transform.match(/translate3d\(([-\d.]+)px, ([-\d.]+)px/)
-      const curX = cur ? parseFloat(cur[1]) : 0
-      const curY = cur ? parseFloat(cur[2]) : 0
-      const nx = curX + (tx - curX) * 0.18
-      const ny = curY + (ty - curY) * 0.18
-      el.style.transform = `translate3d(${nx}px, ${ny}px, 0)`
-
-      const iCur = inner.style.transform.match(/translate3d\(([-\d.]+)px, ([-\d.]+)px/)
-      const iCurX = iCur ? parseFloat(iCur[1]) : 0
-      const iCurY = iCur ? parseFloat(iCur[2]) : 0
-      const inx = iCurX + (itx - iCurX) * 0.22
-      const iny = iCurY + (ity - iCurY) * 0.22
-      inner.style.transform = `translate3d(${inx}px, ${iny}px, 0)`
+      curX += (tx - curX) * 0.18
+      curY += (ty - curY) * 0.18
+      iCurX += (itx - iCurX) * 0.22
+      iCurY += (ity - iCurY) * 0.22
+      el.style.transform = `translate3d(${curX}px, ${curY}px, 0)`
+      inner.style.transform = `translate3d(${iCurX}px, ${iCurY}px, 0)`
       raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)

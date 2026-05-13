@@ -1,23 +1,9 @@
-import { useEffect, useRef } from 'react'
-import { inView, animate } from 'motion'
 import { experiences, education } from '../data/experience'
+import { useRevealOnScroll } from '../hooks/useRevealOnScroll'
+import SectionHeader from './SectionHeader'
 
 export default function Experience() {
-  const ref = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const cleanup = inView(el, () => {
-      const lines = el.querySelectorAll<HTMLElement>('[data-line]')
-      animate(
-        lines,
-        { transform: ['translateY(40px)', 'translateY(0px)'], opacity: [0, 1] },
-        { duration: 0.9, delay: (i) => i * 0.06, ease: [0.16, 1, 0.3, 1] },
-      )
-    })
-    return cleanup
-  }, [])
+  const ref = useRevealOnScroll<HTMLElement>({ distance: 40, duration: 0.9, stagger: 0.06 })
 
   return (
     <section
@@ -26,20 +12,7 @@ export default function Experience() {
       className="relative px-5 py-28 md:px-10 md:py-40"
     >
       <div className="mx-auto max-w-[1600px]">
-        <div className="mb-14 flex items-baseline justify-between md:mb-20">
-          <h2
-            data-line
-            className="font-mono text-[11px] uppercase tracking-[0.3em] text-mute opacity-0"
-          >
-            <span className="text-blood">§</span> 03 — Özgeçmiş
-          </h2>
-          <span
-            data-line
-            className="font-mono text-[10px] uppercase tracking-[0.3em] text-mute opacity-0"
-          >
-            2021 — şimdi
-          </span>
-        </div>
+        <SectionHeader number="03" title="Özgeçmiş" meta="2021 — şimdi" />
 
         <div className="grid grid-cols-1 gap-16 md:grid-cols-12 md:gap-12">
           {/* Experience timeline */}
