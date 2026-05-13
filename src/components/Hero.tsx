@@ -58,7 +58,7 @@ export default function Hero() {
           data-reveal-meta
           className="hidden font-mono text-[10px] uppercase tracking-[0.3em] text-mute opacity-0 sm:block"
         >
-          Mobil Mühendis · Flutter / Firebase
+          Bilgisayar Mühendisi · Yazılım Geliştirici
         </div>
       </div>
 
