@@ -102,7 +102,7 @@ export default function Hero() {
         >
           Web ve mobil tarafta uçtan uca ürün geliştiren bir yazılım geliştiricisiyim.
           Tasarımdan kodlamaya, mağaza yayınından bakım sürecine kadar bir ürünü
-          baştan sona kurarım. Şu an <span className="text-ink underline-link">BaremCars</span>
+          baştan sona kurarım. Şu an <span className="text-ink underline-link">Barem Cars</span>
           {' '}bünyesinde aktif olarak çalışıyorum.
         </p>
 
@@ -137,7 +137,7 @@ export default function Hero() {
           <div data-reveal-grid className="opacity-0">
             <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-mute">Şu an</div>
             <div className="mt-2 text-[15px] leading-tight">
-              <span className="block">BaremCars</span>
+              <span className="block">Barem Cars</span>
               <span className="block text-ink/60">Tam zamanlı görevdeyim</span>
             </div>
           </div>

@@ -2,7 +2,7 @@ import type { Experience } from '../types'
 
 export const experiences: Experience[] = [
   {
-    company: 'BaremCars',
+    company: 'Barem Cars',
     title: 'Yazılım & Operasyon Sorumlusu',
     dateRange: 'Mart 2026 — Halen',
     current: true,

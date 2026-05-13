@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { inView, animate } from 'motion'
 import MagneticButton from './MagneticButton'
 
@@ -12,7 +12,6 @@ const socials = [
 
 export default function Contact() {
   const ref = useRef<HTMLElement>(null)
-  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     const el = ref.current
@@ -27,16 +26,6 @@ export default function Contact() {
     })
     return cleanup
   }, [])
-
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(EMAIL)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1800)
-    } catch {
-      // ignore
-    }
-  }
 
   return (
     <section
@@ -92,21 +81,6 @@ export default function Contact() {
                 <span className="font-mono text-[11px] uppercase tracking-[0.2em]">E-posta gönder</span>
                 <span aria-hidden className="inline-block transition-transform duration-500 group-hover:translate-x-1">→</span>
               </MagneticButton>
-
-              <button
-                type="button"
-                onClick={copy}
-                data-cursor="hover"
-                className="group inline-flex items-center gap-3 rounded-full border border-bone/30 px-6 py-3.5 hover:border-bone transition-colors"
-              >
-                <span className="font-mono text-[11px] uppercase tracking-[0.2em]">
-                  {copied ? 'Kopyalandı ✓' : 'E-postayı kopyala'}
-                </span>
-              </button>
-            </div>
-
-            <div data-line className="mt-8 font-mono text-[12px] tracking-[0.1em] text-bone/55 opacity-0">
-              {EMAIL}
             </div>
           </div>
 
