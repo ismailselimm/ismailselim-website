@@ -131,18 +131,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="pointer-events-none absolute bottom-5 right-5 hidden flex-col items-center gap-3 md:right-10 md:flex">
-        <span
-          className="font-mono text-[10px] uppercase tracking-[0.3em] text-mute"
-          style={{ writingMode: 'vertical-rl' }}
-        >
-          kaydır
-        </span>
-        <span aria-hidden className="h-12 w-px bg-ink/30">
-          <span className="block h-3 w-px animate-[bounce_1.5s_ease-in-out_infinite] bg-ink" />
-        </span>
-      </div>
     </section>
   )
 }
