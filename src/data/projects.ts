@@ -13,7 +13,7 @@ export const projects: Project[] = [
     description:
       'Sokak hayvanlarına yardım etmek isteyenler için kurduğum sosyal fayda odaklı platform. Harita üzerinde besleme noktaları, kayıp/sahiplendirme ilanları, veteriner paneli, topluluk paylaşımları. Mobil uygulama, web sitesi ve admin panelini uçtan uca tasarladım, geliştirdim, yayına aldım.',
     highlights: [
-      'Mobil + web + admin panel — tek elden',
+      'Mobil + web + admin panel — bütün katmanlar',
       'Veteriner CRM, sahiplendirme, kayıp ilanları, harita',
       '700+ otomatik SEO sayfası, çok katmanlı içerik',
     ],
